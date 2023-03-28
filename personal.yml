@@ -5,5 +5,18 @@
       apt:
         update_cache: true
   tasks:
-    - ansible.builtin.include_tasks: 
+    - name: zsh
+      ansible.builtin.include_tasks: 
         file: tasks/zsh.yml
+      tags:
+        - zsh
+    - name: neovim
+      ansible.builtin.include_tasks: 
+        file: tasks/neovim.yml
+      tags:
+        - neovim
+    - name: dotfiles
+      ansible.builtin.include_tasks: 
+        file: tasks/dotfiles.yml
+      tags:
+        - dotfiles

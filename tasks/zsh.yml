@@ -1,4 +1,4 @@
-- name: Install zsh
+- name: zsh install
   apt: name=zsh
   tags:
     - zsh
@@ -6,7 +6,12 @@
   shell: chsh -s `which zsh`
   tags:
     - zsh
-- name: Install ohmyzsh
+- name: install ohmyzsh
   shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   tags:
     - zsh
+- name: zsh theme
+  ansible.builtin.git:
+    repo: https://github.com/romkatv/powerlevel10k.git 
+    dest: /root/.oh-my-zsh/custom/themes/powerlevel10k
+    depth: 1

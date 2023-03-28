@@ -1,0 +1,10 @@
+- name: clone dotfiles
+  ansible.builtin.git:
+    repo: https://github.com/matusstafura/dotfiles
+    dest: /home/matus/dotfiles
+  tags:
+    - dotfiles
+- name: install dotfiles
+  shell: /home/matus/dotfiles/install
+  tags:
+    - dotfiles

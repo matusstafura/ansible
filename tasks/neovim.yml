@@ -1,26 +1,14 @@
-- name: neovim add repository
-  ansible.builtin.apt_repository:
-    repo: ppa:neovim-ppa/stable
-- name: neovim apt update
-  ansible.builtin.apt:
-    update_cache: yes
-- name: neovim install
-  ansible.builtin.apt:
-    pkg: 
-      - neovim
-      - python3-neovim
-# - name: neovim clone
-#   ansible.builtin.git:
-#     repo: https://github.com/neovim/neovim 
-#     dest: neovim
-#   tags:
-#     - neovim
-# - name: neovim make
-#   shell: cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
-#   tags:
-#     - neovim
-# - name: neovim make install
-#   shell: make install
-#   become: true
-#   tags:
-#     - neovim
+- name: neovim clone
+  ansible.builtin.git:
+    repo: https://github.com/neovim/neovim
+    dest: /home/matus/neovim
+  tags:
+    - neovim
+- name: neovim make
+  shell: cd /home/matus/neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
+  tags:
+    - neovim
+- name: neovim make install
+  shell: cd /home/matus/neovim && make install
+  tags:
+    - neovim

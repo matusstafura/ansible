@@ -1,4 +1,6 @@
 - name: clone dotfiles
+  become: true
+  become_user: matus
   ansible.builtin.git:
     repo: https://github.com/matusstafura/dotfiles
     dest: /home/matus/dotfiles
@@ -8,3 +10,8 @@
   shell: /home/matus/dotfiles/install
   tags:
     - dotfiles
+- name: update shell
+  shell: zsh
+  tags:
+    - dotfiles
+

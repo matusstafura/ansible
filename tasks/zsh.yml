@@ -2,16 +2,20 @@
   apt: name=zsh
   tags:
     - zsh
-- name: change shell
-  shell: chsh -s `which zsh`
+- name: clone ohmyzsh
+  ansible.builtin.git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
+    dest: /home/matus/.oh-my-zsh
   tags:
     - zsh
-- name: install ohmyzsh
-  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+- name: change shell
+  shell: chsh -s `which zsh`
   tags:
     - zsh
 - name: zsh theme
   ansible.builtin.git:
     repo: https://github.com/romkatv/powerlevel10k.git 
-    dest: /root/.oh-my-zsh/custom/themes/powerlevel10k
+    dest: /home/matus/.oh-my-zsh/custom/themes/powerlevel10k
     depth: 1
+  tags:
+    - zsh

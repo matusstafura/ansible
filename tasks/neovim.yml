@@ -2,13 +2,10 @@
   ansible.builtin.git:
     repo: https://github.com/neovim/neovim
     dest: /home/matus/neovim
-  tags:
-    - neovim
+  tags: neovim
 - name: neovim make
   shell: cd /home/matus/neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
-  tags:
-    - neovim
+  tags: neovim
 - name: neovim make install
   shell: cd /home/matus/neovim && make install
-  tags:
-    - neovim
+  tags: neovim

@@ -6,18 +6,22 @@
         force_apt_get: true
         update_cache: true
   tasks:
+    - name: print
+      debug:
+       msg: "{{remote_tmp.stdout}}"
     - name: zsh
       ansible.builtin.include_tasks: 
         file: tasks/zsh.yml
-      tags:
-        - zsh
+      tags: zsh
     - name: neovim
       ansible.builtin.include_tasks: 
         file: tasks/neovim.yml
-      tags:
-        - neovim
+      tags: neovim
+    - name: tmux
+      ansible.builtin.include_tasks: 
+        file: tasks/tmux.yml
+      tags: tmux
     - name: dotfiles
       ansible.builtin.include_tasks: 
         file: tasks/dotfiles.yml
-      tags:
-        - dotfiles
+      tags: dotfiles

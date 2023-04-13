@@ -4,14 +4,17 @@
   ansible.builtin.git:
     repo: https://github.com/matusstafura/dotfiles
     dest: /home/matus/dotfiles
-  tags:
-    - dotfiles
+  tags: dotfiles
 - name: install dotfiles
+  become: true
+  become_user: matus
   shell: /home/matus/dotfiles/install
-  tags:
-    - dotfiles
+  tags: dotfiles
+- name: change shell
+  user: 
+    name: matus
+    shell: chsh -s `which zsh`
+  tags: dotfiles
 - name: update shell
-  shell: zsh
-  tags:
-    - dotfiles
-
+  shell: /usr/bin/zsh
+  tags: dotfiles

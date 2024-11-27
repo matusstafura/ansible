@@ -1,27 +1,13 @@
 - hosts: localhost
+  name: mini
+  become: true
   pre_tasks:
     - name: Update cache
-      become: true
       apt:
         force_apt_get: true
         update_cache: true
   tasks:
-    - name: print
-      debug:
-       msg: "{{remote_tmp.stdout}}"
-    - name: zsh
-      ansible.builtin.include_tasks: 
-        file: tasks/zsh.yml
+    - name: install zsh
+      include_tasks:
+        file: tasks/zsh.yaml
       tags: zsh
-    - name: neovim
-      ansible.builtin.include_tasks: 
-        file: tasks/neovim.yml
-      tags: neovim
-    - name: tmux
-      ansible.builtin.include_tasks: 
-        file: tasks/tmux.yml
-      tags: tmux
-    - name: dotfiles
-      ansible.builtin.include_tasks: 
-        file: tasks/dotfiles.yml
-      tags: dotfiles

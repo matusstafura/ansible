@@ -1,0 +1,21 @@
+- name: Install zsh
+  ansible.builtin.package: 
+    name: zsh
+    state: present
+
+- name: Set user shell to zsh
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    shell: /bin/zsh
+  become: true
+
+- name: Download ohmyzsh
+  ansible.builtin.get_url:
+    url: https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+    dest: "/home/{{ ansible_user }}/install.sh"
+    mode: '0755'
+
+- name: Run ohmyzsh install script
+  ansible.builtin.script:
+    cmd: "/home/{{ ansible_user }}/install.sh"
+

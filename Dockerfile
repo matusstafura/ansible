@@ -1,23 +1,14 @@
-FROM ubuntu:focal AS base
+FROM ubuntu:focal
+
+ARG DEBIAN_FRONTEND=noninteractive
+
 WORKDIR /usr/local/bin
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && \
-    apt-get -y upgrade && \
-    apt-get -y install software-properties-common curl git build-essential && \
-    apt-get -y install sudo nano ninja-build gettext libtool-bin cmake g++ pkg-config unzip && \
-    apt-add-repository -y ppa:ansible/ansible && \
-    apt-get update && \
-    apt-get -y install ansible && \
-    apt-get clean && \
-    apt-get -y autoremove 
 
-FROM base AS matus
-RUN useradd -m -s /bin/bash matus && \
-    usermod -aG sudo matus
-RUN echo 'matus ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
-USER matus
-WORKDIR /home/matus
+RUN apt update && \
+    apt install -y software-properties-common && \
+    apt-add-repository --yes --update ppa:ansible/ansible && \
+    apt install -y curl git ansible build-essential
 
-FROM matus
 COPY . .
+
 CMD ["sh", "-c", "ansible-playbook personal.yml"]

@@ -1,12 +1,11 @@
-phony: docker-build
-docker-build:
-	docker build . -t ansible.init
+.PHONY: docker-build docker-run dev
 
-phony: docker-run
+docker-build:
+	docker build -f ./dev/Dockerfile -t ansible.init .
+
 docker-run:
 	docker run --rm -it ansible.init bash
 
-phony: dev
 dev:
 	make docker-build && make docker-run
 

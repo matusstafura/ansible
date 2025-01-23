@@ -1,0 +1,14 @@
+- name: vim add repository
+  apt_repository:
+    repo: ppa:jonathonf/vim
+    state: present
+  tags: vim
+- name: vim update
+  apt:
+    update_cache: yes
+  tags: vim
+- name: vim install
+  apt:
+    name: vim
+    state: present
+  tags: vim

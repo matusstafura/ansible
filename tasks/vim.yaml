@@ -12,3 +12,9 @@
     name: vim
     state: present
   tags: vim
+- name: vim get config
+  get_url:
+    url: https://raw.githubusercontent.com/matusstafura/dotfiles/refs/heads/main/vim/vimrc
+    dest: /home/{{ ansible_user }}/.vimrc
+  tags: vim
+

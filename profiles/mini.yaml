@@ -7,11 +7,15 @@
         force_apt_get: true
         update_cache: true
   tasks:
-    - name: install zsh
+    - name: install zsh with ohmyzsh
       include_tasks:
-        file: tasks/zsh.yaml
+        file: ../tasks/zsh.yaml
       tags: zsh
     - name: install vim
       include_tasks:
-        file: tasks/vim.yaml
+        file: ../tasks/vim.yaml
       tags: vim
+    - name: install fzf
+      include_tasks:
+        file: ../tasks/fzf.yaml
+      tags: fzf

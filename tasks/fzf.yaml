@@ -1,0 +1,16 @@
+- name: Clone fzf
+  ansible.builtin.git:
+    repo: 'https://github.com/junegunn/fzf.git'
+    dest: '/home/{{ ansible_user }}/.fzf'
+    depth: 1
+
+- name: Install fzf
+  ansible.builtin.shell:
+    cmd: /home/{{ ansible_user }}/.fzf/install
+
+- name: Add fzf to zshrc
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_user }}/.zshrc
+    line: 'export PATH="$PATH:$HOME/.fzf/bin"'
+    create: yes
+

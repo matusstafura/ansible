@@ -10,12 +10,28 @@
   become: true
 
 - name: Download ohmyzsh
-  ansible.builtin.get_url:
-    url: https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
-    dest: "/home/{{ ansible_user }}/install.sh"
-    mode: '0755'
+  ansible.builtin.git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
+    dest: /home/{{ ansible_user }}/.oh-my-zsh
+    depth: 1
 
-- name: Run ohmyzsh install script
-  ansible.builtin.script:
-    cmd: "/home/{{ ansible_user }}/install.sh"
+- name: Add zshrc to user
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_user }}/.zshrc
+    line: "export ZSH=~/.oh-my-zsh"
+    create: yes
+
+- name: Add zshrc to user
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_user }}/.zshrc
+    line: "source $ZSH/oh-my-zsh.sh"
+
+- name: Install zsh-autosuggestions
+  ansible.builtin.git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    depth: 1
+
+- name: Change user shell to zsh 
+  shell: "chsh -s $(which zsh)"
 

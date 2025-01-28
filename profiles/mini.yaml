@@ -11,10 +11,16 @@
       include_tasks:
         file: ../tasks/zsh.yaml
       tags: zsh
+
     - name: install vim
       include_tasks:
         file: ../tasks/vim.yaml
       tags: vim
+
+    - name: include personal vim config
+      include_tasks:
+        file: ../personal/vim-config.yaml
+
     - name: install fzf
       include_tasks:
         file: ../tasks/fzf.yaml

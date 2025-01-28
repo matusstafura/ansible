@@ -9,3 +9,5 @@ docker-run:
 dev:
 	make docker-build && make docker-run
 
+temp:
+	ansible-playbook profiles/mini.yaml -u matus

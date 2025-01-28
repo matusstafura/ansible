@@ -1,0 +1,32 @@
+- name: vim get config
+  get_url:
+    url: https://raw.githubusercontent.com/matusstafura/dotfiles/refs/heads/main/vim/vimrc
+    dest: /home/{{ ansible_user }}/.vimrc
+    owner: "{{ ansible_user }}"
+  tags: vim
+  
+- name: Ensure ~/.vim/plugged directory exists
+  become: yes
+  ansible.builtin.file:
+    path: /home/{{ ansible_user }}/.vim/plugged
+    owner: "{{ ansible_user }}"
+    state: directory
+    mode: '0755'
+
+- name: Ensure ~/.vim/autoload directory exists
+  become: yes
+  ansible.builtin.file:
+    path: /home/{{ ansible_user }}/.vim/autoload
+    owner: "{{ ansible_user }}"
+    state: directory
+    mode: '0755'
+
+- name: Install vim-plug
+  become: yes
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: /home/{{ ansible_user }}/.vim/autoload/plug.vim
+    owner: "{{ ansible_user }}"
+    mode: '0644'
+  tags: vim
+ 

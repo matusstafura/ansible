@@ -5,16 +5,19 @@
     repo: https://github.com/matusstafura/dotfiles
     dest: /home/matus/dotfiles
   tags: dotfiles
+
 - name: install dotfiles
   become: true
   become_user: matus
   shell: /home/matus/dotfiles/install
   tags: dotfiles
+
 - name: change shell
   user: 
     name: matus
     shell: chsh -s `which zsh`
   tags: dotfiles
+
 - name: update shell
   shell: /usr/bin/zsh
   tags: dotfiles

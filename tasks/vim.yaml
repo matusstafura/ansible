@@ -1,20 +1,15 @@
-- name: vim add repository
-  apt_repository:
-    repo: ppa:jonathonf/vim
-    state: present
+- name: clone latest vim
+  ansible.builtin.git:
+    repo: 'https://github.com/vim/vim.git'
+    dest: /home/{{ ansible_user }}/vim
+    update: yes
   tags: vim
-- name: vim update
-  apt:
-    update_cache: yes
-  tags: vim
-- name: vim install
-  apt:
-    name: vim
-    state: present
-  tags: vim
-- name: vim get config
-  get_url:
-    url: https://raw.githubusercontent.com/matusstafura/dotfiles/refs/heads/main/vim/vimrc
-    dest: /home/{{ ansible_user }}/.vimrc
+
+- name: build vim
+  ansible.builtin.shell: |
+    apt install -y git make clang libtool-bin 
+    cd /home/{{ ansible_user }}/vim/src
+    make
+    make install
   tags: vim
 

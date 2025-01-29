@@ -14,3 +14,13 @@
     line: 'export PATH="$PATH:$HOME/.fzf/bin"'
     create: yes
 
+- name: Source zshrc in zshrc 
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_user }}/.zshrc
+    line: '[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh'
+
+- name: Add shortcut
+  ansible.builtin.lineinfile:
+    path: /home/{{ ansible_user }}/.zshrc
+    line: 'bindkey -s ^f "fzf\n"'
+

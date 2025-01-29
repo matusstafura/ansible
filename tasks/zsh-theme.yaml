@@ -9,3 +9,8 @@
     path: /home/{{ ansible_user }}/.zshrc
     line: 'ZSH_THEME="powerlevel10k/powerlevel10k"'
 
+- name: Add powerlevel10k to zshrc
+  ansible.builtin.lineinfile: 
+    path: /home/{{ ansible_user }}/.zshrc
+    line: '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh'
+

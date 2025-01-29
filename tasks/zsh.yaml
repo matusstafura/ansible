@@ -15,6 +15,13 @@
     dest: /home/{{ ansible_user }}/.oh-my-zsh
     depth: 1
 
+- name: Create .zshrc
+  ansible.builtin.file: 
+    path: /home/{{ ansible_user }}/.zshrc
+    owner: "{{ ansible_user }}"
+    state: touch
+    mode: '0644'
+
 - name: Add zshrc to user
   ansible.builtin.lineinfile:
     path: /home/{{ ansible_user }}/.zshrc

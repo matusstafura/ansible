@@ -21,12 +21,15 @@
     state: directory
     mode: '0755'
 
-- name: Install vim-plug
-  become: yes
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    dest: /home/{{ ansible_user }}/.vim/autoload/plug.vim
-    owner: "{{ ansible_user }}"
-    mode: '0644'
+- name: Install vim plugins
+  shell: vim -c 'PlugInstall' -c 'qa!'
+  args:
+    chdir: /home/{{ ansible_user }}/.vim
   tags: vim
- 
+
+- name: get powerlevel10k config
+  get_url:
+    url: https://raw.githubusercontent.com/matusstafura/dotfiles/refs/heads/main/zsh/p10k.zsh
+    dest: /home/{{ ansible_user }}/.oh-my-zsh/custom/themes/powerlevel10k.zsh
+    owner: "{{ ansible_user }}"
+  tags: zsh

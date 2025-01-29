@@ -12,6 +12,11 @@
         file: ../tasks/zsh.yaml
       tags: zsh
 
+    - name: install powerlevel10k
+      include_tasks:
+        file: ../tasks/zsh-theme.yaml
+      tags: zsh
+
     - name: install vim
       include_tasks:
         file: ../tasks/vim.yaml

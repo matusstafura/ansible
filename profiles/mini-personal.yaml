@@ -1,0 +1,6 @@
+- hosts: localhost
+  name: mini-personal
+  tasks:
+    - name: include personal vim config
+      include_tasks:
+        file: ../personal/vim-config.yaml
